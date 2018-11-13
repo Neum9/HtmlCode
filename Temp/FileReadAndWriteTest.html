@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File read and write</title>
+</head>
+<body>
+	<script type="text/javascript" src="FileSaver.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		//var fso = new ActiveXObject("Scripting.FileSystemObject");
+		//var f=fso.createtextfile("‪C:\Code\HtmlCode\cocos2d-js-min.js",2,true);
+		//var f = fso.createtextfile("‪c:\\Code\\HtmlCode\\test.txt",true);
+		//f.write("test!");
+		//f.close();
+
+		var content = "test!";
+		var blob = new Blob([content],{type: "text/plain;charset=UTF-8"});
+		saveAs(blob,"test.txt");
+
+	</script>
+	</body>
+	</html>

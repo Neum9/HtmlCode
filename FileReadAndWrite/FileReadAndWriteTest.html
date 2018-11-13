@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>File read and write</title>
+</head>
+<body>
+	<script type="text/javascript" src="FileSaver.js" charset="utf-8"></script>
+	<script type="text/javascript">
+
+		var content = "test!";
+		var blob = new Blob([content],{type: "text/plain;charset=UTF-8"});
+		saveAs(blob,"test.txt");
+
+	</script>
+	</body>
+	</html>

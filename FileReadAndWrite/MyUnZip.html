@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<script type="text/javascript" src="pako.js"></script>
+	<script type="text/javascript" src="FileSaver.js" charset="utf-8"></script>
+	<script>
+		function unzip(b64Data){
+			var strData   = atob(b64Data);
+  // Convert binary string to character-number array
+  var charData  = strData.split('').map(function(x){return x.charCodeAt(0);});
+  // Turn number array into byte-array
+  var binData   = new Uint8Array(charData);
+  // // unzip
+  var data    = pako.inflate(binData);
+  // Convert gunzipped byteArray back to ascii string:
+  //strData   = String.fromCharCode.apply(null, new Uint16Array(data));
+
+  var array = new Uint16Array(data);
+  var res = '';
+  var chunk = 8 * 1024;
+  var i;
+  for (i = 0; i < array.length / chunk; i++) {
+  	res += String.fromCharCode.apply(null, array.slice(i * chunk, (i + 1) * chunk));
+  }
+  res += String.fromCharCode.apply(null, array.slice(i * chunk));
+  return res;
+
+  //return strData;
+}
+function upload(input) {
+	//支持chrome IE10
+	if (window.FileReader) {
+		var file = input.files[0];
+		filename = file.name.split(".")[0];
+		var reader = new FileReader();
+		reader.onload = function() {
+			console.log(this.result)
+			alert(this.result);
+
+			//change
+			var data = unzip(this.result);
+
+			//download
+			var content = data;
+			var blob = new Blob([content],{type: "text/plain;charset=UTF-8"});
+			saveAs(blob,"test.txt");
+
+		}
+		reader.readAsText(file);
+	}else { 
+		alert('error'); 
+	} 
+}
+</script>
+<title>My UnZip</title>
+</head>
+<body>
+	<input id='file' type="file" onchange="upload(this)" />
+</body>
+</html>
