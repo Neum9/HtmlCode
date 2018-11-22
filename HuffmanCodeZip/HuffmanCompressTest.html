@@ -9,11 +9,20 @@
 </head>
 
 <body>
-    <script src="HuffmanCode.js">
-    </script>
+    <script src="BinaryUtil.js"></script>
+    <script src="HashTable.js"></script>
+    <script src="HuffmanCode.js"></script>
+
+
+
     <script type="text/javascript">
-        HuffmanUtil.m_compressStr = "abbaaacc";
-        HuffmanUtil.Compress();
+        var compressHuffman = CreateHuffman();
+        compressHuffman.m_compressStr = "abbaaacc";
+        compressHuffman.Compress();
+
+        var deCompressHuffman = CreateHuffman();
+        deCompressHuffman.m_deCompressStr = compressHuffman.m_compressedStr;
+        deCompressHuffman.DeCompress();
         console.log("This is test!");
     </script>
 </body>
